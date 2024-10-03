@@ -436,7 +436,7 @@ div#primary_sidebar {
 }
 
 
-section.post_cards {
+.post_cards {
     display: flex;
     width: 80%;
     margin: auto;

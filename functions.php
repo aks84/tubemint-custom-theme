@@ -30,42 +30,57 @@ function custom_theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'custom_theme_enqueue_scripts');
 
-function filter_posts_by_category_and_month() {
-    if (isset($_GET['category']) || isset($_GET['month'])) {
-        $category = sanitize_text_field($_GET['category']);
-        $month = sanitize_text_field($_GET['month']);
 
-        $args = array(
-            'post_type' => 'post',
-            'posts_per_page' => -1,
-            'category__in' => $category ? array($category) : '',
-            'date_query' => $month ? array(
-                array(
-                    'year' => date('Y', strtotime($month)),
-                    'month' => date('n', strtotime($month))
-                )
-            ) : '',
-        );
+// post filter
+function filter_posts() {
+    $category_slug = sanitize_text_field($_POST['category']);
+    $year = intval($_POST['year']);
+    $month = intval($_POST['month']);
 
-        $query = new WP_Query($args);
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => -1,
+        'category_name' => $category_slug, // Use category slug for filtering
+        'date_query' => array(
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        ),
+    );
 
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                get_template_part('template-parts/content', get_post_type());
-            }
-            wp_reset_postdata();
-        } else {
-            echo '<p>' . __('No posts found.', 'textdomain') . '</p>';
-        }
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) { ?>
+        <div class="post_cards">
+       <?php  while ($query->have_posts()) : $query->the_post(); ?>
+            <div class="post-card">
+
+                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <?php if (has_post_thumbnail()) : ?>
+                    <?php the_post_thumbnail(); ?>
+                <?php endif; ?>
+            </div>
+        <?php endwhile; ?>
+        </div>
+
+        <hr>
+        <!-- post_cards -->
+        <?php 
+
+    } else {
+        echo '<p>No posts found for the selected category and date.</p>';
     }
+
+    wp_reset_postdata();
+    die();
 }
-
-add_action('pre_get_posts', 'filter_posts_by_category_and_month');
-
-
+add_action('wp_ajax_filter_posts', 'filter_posts');
+add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
 
 
+
+// register primary sidebar
 add_action( 'widgets_init', 'tubemint_register_sidebars' );
 function tubemint_register_sidebars() {
     register_sidebar(
@@ -80,3 +95,7 @@ function tubemint_register_sidebars() {
         )
     );
 }
+
+
+
+

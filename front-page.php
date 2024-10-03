@@ -49,6 +49,10 @@
         while ($recent_posts->have_posts()) : $recent_posts->the_post();
         ?>
         <div class="post-card">
+    <?php if (has_post_thumbnail()) : ?>
+        <?php the_post_thumbnail(); ?>
+    <?php endif; ?>
+            
             <h3><?php the_title(); ?></h3>
             <a href="<?php the_permalink(); ?>">Read More</a>
         </div>
