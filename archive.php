@@ -1,8 +1,7 @@
 <?php get_header(); ?>
 
-<div class="content-area">
-    <main class="site-main">
-        <h1 class="archive-title"><?php the_archive_title(); ?></h1>
+<h2 class="archive-title" style="text-align: center;"><?php the_archive_title(); ?></h2>
+
 
         <!-- Filter Section -->
 <section class="blog-filter">
@@ -33,9 +32,12 @@
     </form>
 </section>
 
-<section class="blog-posts" id="blogPosts">
+<section class="post_cards" id="blogPosts">
     <!-- AJAX-loaded posts will appear here -->
+
 </section>
+  <br>
+
 
 <script>
     document.getElementById('filterButton').addEventListener('click', function (e) {
@@ -83,26 +85,29 @@
 </script>
 
 <!-- archive page posts -->
-
+<section class="post_cards">
 <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <article id="post-<?php the_ID(); ?>" class="post-card">
                 <header class="entry-header">
                     <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     <div class="entry-meta">
-                        <span class="posted-on"><?php echo get_the_date(); ?></span>
+                       <i><small> <span class="posted-on"><?php  //echo get_the_date(); ?></span></small></i>
                     </div>
                 </header>
                 <div class="entry-excerpt">
-                    <?php the_excerpt(); ?>
+                    <?php // the_excerpt(); ?>
+                    <?php if (has_post_thumbnail()): ?>
+                        <?php the_post_thumbnail(); ?>
+                    <?php endif ?>
                 </div>
             </article>
         <?php endwhile; ?>
     <?php else : ?>
         <p><?php esc_html_e('No posts found.', 'textdomain'); ?></p>
     <?php endif; ?>
-</main>
-</div>
+<!-- post_cards -->
+</section>
 
 <?php // get_sidebar(); ?>
 <?php get_footer(); ?>

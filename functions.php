@@ -51,9 +51,8 @@ function filter_posts() {
 
     $query = new WP_Query($args);
 
-    if ($query->have_posts()) { ?>
-        <div class="post_cards">
-       <?php  while ($query->have_posts()) : $query->the_post(); ?>
+    if ($query->have_posts()) { 
+     while ($query->have_posts()) : $query->the_post(); ?>
             <div class="post-card">
 
                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -61,12 +60,8 @@ function filter_posts() {
                     <?php the_post_thumbnail(); ?>
                 <?php endif; ?>
             </div>
-        <?php endwhile; ?>
-        </div>
-
-        <hr>
-        <!-- post_cards -->
-        <?php 
+            <br>
+        <?php endwhile; 
 
     } else {
         echo '<p>No posts found for the selected category and date.</p>';

@@ -29,7 +29,7 @@
     </form>
 </section>
 
-<section class="blog-posts" id="blogPosts">
+<section class="post_cards" id="blogPosts">
     <!-- AJAX-loaded posts will appear here -->
 </section>
 
