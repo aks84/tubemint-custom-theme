@@ -47,3 +47,12 @@ jQuery(document).ready(function($) {
         }
     });
 });
+
+
+// header search box
+const searchbar = document.querySelector('.Searchbar');
+const toggle = searchbar.querySelector('.Searchbar-toggle');
+
+toggle.addEventListener('click', event => {
+  searchbar.classList.toggle('Searchbar--active');
+});

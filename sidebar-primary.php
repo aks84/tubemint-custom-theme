@@ -4,10 +4,6 @@
 
 	<?php if ( ! dynamic_sidebar( 'sidebar-primary' ) ) : ?>
 
-		<aside id="search" class="widget widget_search">
-			<?php get_search_form(); ?>
-		</aside><!-- #search -->
-
 
 		<aside id="category_list" class="widget">
 			<h3 class="widget-title"><?php _e( 'Categories', 'shape' ); ?></h3>

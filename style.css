@@ -16,7 +16,7 @@ body {
     font-family: Yu Gothic, Dahlia;
     margin: 0;
     padding: 0;
-    color: #380101;
+    color: #210202;
     background-color: #f4f4f4;
 
 }
@@ -74,6 +74,67 @@ a:hover {
 .site-navigation a:hover {
     color: #1e73be;
 }
+
+/* header search styling */
+
+
+.header-search{
+    margin-right: 20px;
+}
+.Searchbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Searchbar-input {
+  width: 0;
+  border: 0px solid #eee;
+  padding: 10px 0;
+  transition: width ease-out 1000ms, padding ease-out 1000ms, border 1000ms;
+}
+
+.Searchbar-toggle {
+  position: relative;
+  font-size: 1.25rem;
+  width: 1em;
+  height: 1em;
+  color: black;
+}
+.Icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  transition: opacity 1000ms;
+  
+}
+
+.Icon-search {
+  opacity: 1;
+}
+
+.Icon-close {
+  opacity: 0;
+}
+
+
+.Searchbar--active {}
+.Searchbar--active .Searchbar-input {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid #eee;
+}
+
+.Searchbar--active .Icon-search {
+  opacity: 0;
+}
+
+.Searchbar--active .Icon-close {
+  opacity: 1;
+}
+
+
 
 /* Ensure that the slider container takes full width and height */
 .hero-slider {

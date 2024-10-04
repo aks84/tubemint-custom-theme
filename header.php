@@ -19,5 +19,17 @@
     <nav class="site-navigation">
         <?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
     </nav>
+
+<div class="header-search">
+<div class="Searchbar">
+  <input class="Searchbar-input" type="text" placeholder="Search" />
+  <span class="Searchbar-toggle">
+    <i class="fas fa-search Icon Icon-search"></i>
+    <i class="fas fa-times Icon Icon-close"></i>
+  </span>
+</div>
+</div>
+
+
 </header>
 
