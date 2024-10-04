@@ -81,14 +81,14 @@
 
 
 
-
 <section class="post_cards">
 <?php
-// Add this before the loop to ensure you're querying the right posts
+// Define the query parameters
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $args = array(
     'post_type' => 'post', // Ensure you're querying for posts
-    'posts_per_page' => 10, // Adjust the number of posts you want
-    'paged' => get_query_var('paged') ? get_query_var('paged') : 1 // Pagination support
+    'posts_per_page' => 10, // Adjust the number of posts you want per page
+    'paged' => $paged, // Add pagination support
 );
 
 $blog_query = new WP_Query($args);
@@ -105,12 +105,26 @@ if ($blog_query->have_posts()) :
 </div>
 <?php
     endwhile;
-    wp_reset_postdata(); // Important: Reset post data after custom query
+    wp_reset_postdata(); // Reset the global post object after custom query
 else :
     echo '<p>No posts found.</p>';
 endif;
 ?>
 </section>
+
+<!-- Post navigation -->
+<div class="pagination">
+    <?php
+    // Custom pagination using paginate_links
+    echo paginate_links(array(
+        'total' => $blog_query->max_num_pages, // Pass the total number of pages from the custom query
+        'current' => max(1, get_query_var('paged')),
+        'format' => '?paged=%#%',
+        'prev_text' => __('« Previous'),
+        'next_text' => __('Next »'),
+    ));
+    ?>
+</div>
 
 
 <?php get_footer(); ?>

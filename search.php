@@ -1,31 +1,37 @@
 
 <?php get_header(); ?>
 
-<div class="container">
-    <h1>
+  <h3 style="text-align: center;">
         <?php 
         // Display search query
         printf(__('Search Results for: %s', 'textdomain'), get_search_query()); 
         ?>
-    </h1>
+    </h3>
+
+<section class="post_cards">
+
+  
 
     <?php if (have_posts()) : ?>
-        <div class="search-results">
             <?php while (have_posts()) : the_post(); ?>
-                <div class="search-result-item">
+                <div class="post-card">
                     <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                    <p><?php the_excerpt(); ?></p>
+                   <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail(); ?>
+                  <?php endif; ?>
+                    <?php echo wp_trim_words(get_the_content(), 20); ?>
                 </div>
             <?php endwhile; ?>
-        </div>
+
+
+    <?php else : ?>
+        <p><?php _e('Sorry, no results found.', 'textdomain'); ?></p>
+    <?php endif; ?>
+</section>
 
         <!-- Post navigation -->
         <div class="pagination">
             <?php the_posts_pagination(); ?>
         </div>
-    <?php else : ?>
-        <p><?php _e('Sorry, no results found.', 'textdomain'); ?></p>
-    <?php endif; ?>
-</div>
 
 <?php get_footer(); ?>

@@ -21,14 +21,17 @@
     </nav>
 
 <div class="header-search">
-<div class="Searchbar">
-  <input class="Searchbar-input" type="text" placeholder="Search" />
+<form role="search" method="get" class="Searchbar" action="<?php echo esc_url(home_url('/')); ?>">
+  <input class="Searchbar-input" type="text" placeholder="Search" value="<?php echo get_search_query(); ?>" name="s" autofocus />
   <span class="Searchbar-toggle">
     <i class="fas fa-search Icon Icon-search"></i>
     <i class="fas fa-times Icon Icon-close"></i>
   </span>
+   </form>
 </div>
-</div>
+
+
+
 
 
 </header>
