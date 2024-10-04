@@ -1,9 +1,6 @@
 <?php get_header(); ?>
 
-<h2 class="archive-title" style="text-align: center;"><?php the_archive_title(); ?></h2>
-
-
-        <!-- Filter Section -->
+<br>        <!-- Filter Section -->
 <section class="blog-filter">
     <form method="get" action="<?php echo esc_url(home_url('/')); ?>" id="filterForm">
         <select name="category" id="category">
