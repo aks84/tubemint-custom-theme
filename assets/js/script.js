@@ -35,24 +35,24 @@ jQuery(document).ready(function($) {
     });
 });
 
-jQuery(document).ready(function($) {
-    var header = $('#site-header');
-    var sticky = header.offset().top;
+// jQuery(document).ready(function($) {
+//     var header = $('#site-header');
+//     var sticky = header.offset().top;
 
-    $(window).scroll(function() {
-        if (window.pageYOffset > sticky) {
-            header.addClass('sticky');
-        } else {
-            header.removeClass('sticky');
-        }
-    });
-});
+//     $(window).scroll(function() {
+//         if (window.pageYOffset > sticky) {
+//             header.addClass('sticky');
+//         } else {
+//             header.removeClass('sticky');
+//         }
+//     });
+// });
 
 
 // header search box
-const searchbar = document.querySelector('.Searchbar');
-const toggle = searchbar.querySelector('.Searchbar-toggle');
+// const searchbar = document.querySelector('.Searchbar');
+// const toggle = searchbar.querySelector('.Searchbar-toggle');
 
-toggle.addEventListener('click', event => {
-  searchbar.classList.toggle('Searchbar--active');
-});
+// toggle.addEventListener('click', event => {
+//   searchbar.classList.toggle('Searchbar--active');
+// });

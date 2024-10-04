@@ -6,10 +6,9 @@
 
 
 		<aside id="category_list" class="widget">
-			<h3 class="widget-title"><?php _e( 'Categories', 'shape' ); ?></h3>
 			<ul>
 			
-				<?php wp_list_cats(); ?>
+				<?php wp_list_categories(); ?>
 			</ul>
 
 		</aside><!-- #categories -->
@@ -21,6 +20,8 @@
 				<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
 			</ul>
 		</aside><!-- #archives -->
+
+	
 
 	<?php endif; ?>
 

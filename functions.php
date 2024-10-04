@@ -1,21 +1,4 @@
 <?php
-// Theme setup
-function custom_classic_theme_setup() {
-    // Add support for dynamic title tags
-    add_theme_support('title-tag');
-
-    // Add custom logo support
-    add_theme_support('custom-logo');
-
-    // Add support for featured images
-    add_theme_support('post-thumbnails');
-
-    // Register menu
-    register_nav_menus(array(
-        'header-menu' => __('Header Menu', 'custom-classic-theme')
-    ));
-}
-add_action('after_setup_theme', 'custom_classic_theme_setup');
 
 // Enqueue scripts and styles
 function custom_classic_theme_scripts() {
@@ -34,6 +17,55 @@ function enqueue_font_awesome() {
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 }
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
+
+
+
+// Theme setup
+function tubemint_custom_theme_setup() {
+    // Add support for dynamic title tags
+    add_theme_support('title-tag');
+    add_theme_support('widgets');
+    add_theme_support( 'html5', array(
+        'comment-list', 
+        'comment-form',
+        'search-form',
+        'gallery',
+        'caption',
+    ) );
+    add_theme_support('link-color');
+    add_theme_support('menus');
+    add_theme_support('responsive-embeds');
+    add_theme_support(
+            'post-formats',
+            array(
+                'aside',
+                'image',
+                'video',
+                'quote',
+                'link',
+                'gallery',
+                'audio',
+            )
+        );
+
+    // Add custom logo support
+    add_theme_support('custom-logo');
+
+    // Add support for featured images
+    add_theme_support('post-thumbnails');
+
+    // Register menu
+    register_nav_menus(array(
+        'header-menu' => __('Header Menu', 'custom-theme')
+    ));
+
+    register_nav_menus(array(
+        'footer_menu' => __('Footer Menu', 'custom-theme'),
+    ));
+}
+add_action('after_setup_theme', 'tubemint_custom_theme_setup');
+
+
 
 
 
@@ -81,9 +113,87 @@ add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
 
 
 
-// register primary sidebar
-add_action( 'widgets_init', 'tubemint_register_sidebar_first' );
-function tubemint_register_sidebar_first() {
+// Theme customizer 
+
+function tubemint_custom_theme_customizer($wp_customize) {
+    // Social Media Section
+    $wp_customize->add_section('footer_social_section', array(
+        'title' => __('Footer Social Media', 'custom-theme'),
+        'priority' => 30,
+    ));
+
+    $social_media = array('Facebook', 'Twitter', 'Instagram', 'LinkedIn');
+    foreach ($social_media as $platform) {
+        $wp_customize->add_setting('footer_' . strtolower($platform) . '_link', array(
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+
+        $wp_customize->add_control('footer_' . strtolower($platform) . '_link', array(
+            'label' => __($platform . ' URL', 'custom-theme'),
+            'section' => 'footer_social_section',
+            'type' => 'url',
+        ));
+    }
+
+    // Payment Icons Section
+    $wp_customize->add_section('footer_payment_section', array(
+        'title' => __('Footer Payment Icons', 'custom-theme'),
+        'priority' => 31,
+    ));
+
+    // Add a repeatable image field for payment gateway icons
+    for ($i = 1; $i <= 5; $i++) {
+        $wp_customize->add_setting('footer_payment_icon_' . $i, array(
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            'footer_payment_icon_' . $i,
+            array(
+                'label' => __('Payment Gateway Icon ' . $i, 'custom-theme'),
+                'section' => 'footer_payment_section',
+                'settings' => 'footer_payment_icon_' . $i,
+            )
+        ));
+    }
+}
+add_action('customize_register', 'tubemint_custom_theme_customizer');
+
+
+
+
+
+// Register Footer Widgets
+function tubemint_custom_theme_widgets() {
+    register_sidebar(array(
+        'name' => 'Footer Address',
+        'id' => 'footer_address',
+        'before_widget' => '<div class="footer-address">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4>',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Footer Contact Info',
+        'id' => 'footer_contact',
+        'before_widget' => '<div class="footer-contact">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4>',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(
+    array(
+        'id'            => 'secondary',
+        'name'          => __( 'Secondary Sidebar' ),
+        'description'   => __( 'A short description of the sidebar.' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ));
     register_sidebar(
         array(
             'id'            => 'primary',
@@ -93,25 +203,7 @@ function tubemint_register_sidebar_first() {
             'after_widget'  => '</div>',
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
-        )
-    );
+    ));
+
 }
-
-
-
-
-// register secondry sidebar
-add_action( 'widgets_init', 'tubemint_register_sidebar_second' );
-function tubemint_register_sidebar_second() {
-    register_sidebar(
-        array(
-            'id'            => 'secondary',
-            'name'          => __( 'Secondary Sidebar' ),
-            'description'   => __( 'A short description of the sidebar.' ),
-            'before_widget' => '<div id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h3 class="widget-title">',
-            'after_title'   => '</h3>',
-        )
-    );
-}
+add_action('widgets_init', 'tubemint_custom_theme_widgets');

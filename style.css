@@ -263,12 +263,12 @@ a:hover {
 
 .post-card {
     background-color: #fff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     width: 25%;
     margin: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
 }
 
 .post-card img {
@@ -454,8 +454,8 @@ a:hover {
 }
 
 
-#sidebar ul:first-child  {
-    list-style-type: none; /* Removes the bullet points */
+.sidebar ul {
+    list-style-type: "#";
 }
 
 div#primary_sidebar {
@@ -523,11 +523,58 @@ div#primary_sidebar {
     
 }
 
-.pagination a{
-    padding: 5px;
-    width: 20px;
-    height: 20px;
-    background-color: gray;
+.pagination a {
+    padding: 5px 10px;
+    background-color: #1e73be;
     color: white;
-    
+    font-weight: 800;
+}
+
+
+/* Footer style */
+
+.site-footer {
+    background-color: #1e73be;
+    padding: 40px;
+    color: whtie;
+}
+
+.footer-widgets {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex-basis: 33%;
+    text-align: left;
+}
+
+.footer-menu-list {
+    list-style: circle;
+    padding: 0;
+    margin: 20px 0px 0px 25px;
+}
+
+.footer-menu-list li a {
+    color: whitesmoke;
+}
+
+.social-media-icons a {
+    margin-right: 10px;
+    color: whitesmoke;
+    font-size: 1.5rem;
+}
+
+.payment-icons {
+    display: flex;
+    margin-top: 20px;
+    background-color: lightblue;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.payment-icons img.payment-icon {
+    width: 40px;
+    height: auto;
+    margin: 0 5px;
 }
