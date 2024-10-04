@@ -100,6 +100,8 @@
                     <?php if (has_post_thumbnail()): ?>
                         <?php the_post_thumbnail(); ?>
                     <?php endif ?>
+                      <?php echo wp_trim_words(get_the_content(), 15); ?>
+                    <a href="<?php the_permalink(); ?>"><span class="read_arrow">→</span></a>
                 </div>
             </article>
         <?php endwhile; ?>

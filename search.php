@@ -20,6 +20,7 @@
                         <?php the_post_thumbnail(); ?>
                   <?php endif; ?>
                     <?php echo wp_trim_words(get_the_content(), 20); ?>
+                    <a href="<?php the_permalink(); ?>"><span class="read_arrow">→</span></a>
                 </div>
             <?php endwhile; ?>
 

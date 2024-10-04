@@ -54,7 +54,8 @@
     <?php endif; ?>
             
             <h3><?php the_title(); ?></h3>
-            <a href="<?php the_permalink(); ?>">Read More</a>
+              <?php echo wp_trim_words(get_the_content(), 15); ?>
+                    <a href="<?php the_permalink(); ?>"><span class="read_arrow">→</span></a>
         </div>
         <?php endwhile; wp_reset_postdata(); ?>
     </div>
