@@ -76,8 +76,8 @@ add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
 
 
 // register primary sidebar
-add_action( 'widgets_init', 'tubemint_register_sidebars' );
-function tubemint_register_sidebars() {
+add_action( 'widgets_init', 'tubemint_register_sidebar_first' );
+function tubemint_register_sidebar_first() {
     register_sidebar(
         array(
             'id'            => 'primary',
@@ -94,3 +94,18 @@ function tubemint_register_sidebars() {
 
 
 
+// register secondry sidebar
+add_action( 'widgets_init', 'tubemint_register_sidebar_second' );
+function tubemint_register_sidebar_second() {
+    register_sidebar(
+        array(
+            'id'            => 'secondary',
+            'name'          => __( 'Secondary Sidebar' ),
+            'description'   => __( 'A short description of the sidebar.' ),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+}

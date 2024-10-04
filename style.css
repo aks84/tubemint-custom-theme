@@ -13,11 +13,12 @@ Text Domain: tubemint-custom-theme
 
 /* General styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Yu Gothic, Dahlia;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #380101;
     background-color: #f4f4f4;
+
 }
 
 a {
@@ -350,6 +351,9 @@ a:hover {
     flex-wrap: nowrap;
     align-items: flex-start;
     flex-direction: row;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: normal;
 }
 
 .site-main {

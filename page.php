@@ -16,7 +16,7 @@
 
 </main>
 
-<?php get_sidebar("primary"); ?>
+<?php  get_sidebar("secondary"); ?>
 
 
 </div>
