@@ -207,3 +207,74 @@ function tubemint_custom_theme_widgets() {
 
 }
 add_action('widgets_init', 'tubemint_custom_theme_widgets');
+
+
+
+
+function custom_theme_slider_customizer($wp_customize) {
+    // Add a section for the slider
+    $wp_customize->add_section('slider_section', array(
+        'title'       => __('Hero Slider', 'custom-theme'),
+        'priority'    => 30,
+        'description' => 'Customize the hero slider.',
+    ));
+
+    // Add settings and controls for each slider
+    for ($i = 1; $i <= 3; $i++) {
+        // Image
+        $wp_customize->add_setting("slider_image_$i", array(
+            'default'   => '',
+            'transport' => 'refresh',
+        ));
+
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            "slider_image_$i",
+            array(
+                'label'    => __("Slider Image $i", 'custom-theme'),
+                'section'  => 'slider_section',
+                'settings' => "slider_image_$i",
+            )
+        ));
+
+        // Text
+        $wp_customize->add_setting("slider_text_$i", array(
+            'default'           => __("Slider Text $i", 'custom-theme'),
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+
+        $wp_customize->add_control("slider_text_$i", array(
+            'label'    => __("Slider Text $i", 'custom-theme'),
+            'section'  => 'slider_section',
+            'settings' => "slider_text_$i",
+            'type'     => 'text',
+        ));
+
+        // Button Text
+        $wp_customize->add_setting("slider_button_text_$i", array(
+            'default'           => __("Learn More", 'custom-theme'),
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+
+        $wp_customize->add_control("slider_button_text_$i", array(
+            'label'    => __("Button Text $i", 'custom-theme'),
+            'section'  => 'slider_section',
+            'settings' => "slider_button_text_$i",
+            'type'     => 'text',
+        ));
+
+        // Button Link
+        $wp_customize->add_setting("slider_button_link_$i", array(
+            'default'           => '#',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+
+        $wp_customize->add_control("slider_button_link_$i", array(
+            'label'    => __("Button Link $i", 'custom-theme'),
+            'section'  => 'slider_section',
+            'settings' => "slider_button_link_$i",
+            'type'     => 'url',
+        ));
+    }
+}
+add_action('customize_register', 'custom_theme_slider_customizer');

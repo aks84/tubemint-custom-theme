@@ -1,13 +1,12 @@
 
 <?php get_header(); ?>
-
 <section class="hero-slider">
     <?php
     for ($i = 1; $i <= 3; $i++) {
-        $image = get_template_directory_uri() . "/assets/slider_image_$i.jpg";
-        $text = "slider_text_$i";
-        $button_text = "slider_button_text_$i";
-        $button_link = "#";
+        $image = get_theme_mod("slider_image_$i");
+        $text = get_theme_mod("slider_text_$i", "Slider Text $i");
+        $button_text = get_theme_mod("slider_button_text_$i", "Learn More");
+        $button_link = get_theme_mod("slider_button_link_$i", "#");
         if ($image) :
     ?>
     <div class="slider-item">
@@ -20,12 +19,13 @@
     <?php endif; } ?>
 
     <!-- Add pagination dots -->
-<div class="slider-dots">
-    <span class="dot" data-slide="0"></span>
-    <span class="dot" data-slide="1"></span>
-    <span class="dot" data-slide="2"></span>
-</div>
+    <div class="slider-dots">
+        <span class="dot" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+    </div>
 </section>
+
 
 <section class="services">
     <h2>Our Services</h2>

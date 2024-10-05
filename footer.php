@@ -1,5 +1,7 @@
+<?php wp_footer(); ?>
 
 <footer class="site-footer">
+    
 <div class="footer-widgets">
 
 <!-- Column 1st -->
@@ -87,5 +89,5 @@ toggle.addEventListener('click', event => {
     });
 });
 </script>
-<?php wp_footer(); ?>
+
 </footer>

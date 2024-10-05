@@ -568,13 +568,18 @@ div#primary_sidebar {
 .payment-icons {
     display: flex;
     margin-top: 20px;
-    background-color: lightblue;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    background-color:white;
+    width: 60%;
 }
 
 .payment-icons img.payment-icon {
-    width: 40px;
+    max-width: 30px;
     height: auto;
     margin: 0 5px;
+}
+.wp-post-image {
+    width: 100%;
+    height: auto;
 }
