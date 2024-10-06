@@ -566,15 +566,19 @@ nav {
     padding: 10px 20px;
 }
 
-nav ul {
+nav .nav-menu {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
 }
 
-nav li {
-    position: relative;
+ul li {
+
+    list-style: none;
+}
+
+nav .menu-item {
     margin-right: 20px;
 }
 
@@ -589,29 +593,29 @@ nav a:hover {
     color: #f0a500;
 }
 
+
+
 /* Dropdown and Mega Menu Shared Styles */
-.sub-menu,
-.mega-menu {
+.sub-menu {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
     background-color: #444;
     border-radius: 4px;
     z-index: 1000;
 }
+
 
 /* Dropdown Menu Styles */
 .sub-menu {
     min-width: 160px;
 }
 
-nav li:hover > .sub-menu {
+nav menu-item:hover > .sub-menu {
     display: block;
 }
 
 .sub-menu li {
-    width: 100%;
+/*    width: 100%;*/
 }
 
 .sub-menu a {
@@ -624,15 +628,35 @@ nav li:hover > .sub-menu {
 .sub-menu a:hover {
     background-color: #555;
 }
-
-
-
-.mega-rows{
+.mega-menu
+ {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    border-radius: 4px;
+    z-index: 1000;
     width: 100%;
-    height: auto;
-
+    float: left;
+    left: 0;
+    top:88px;
+    padding: 15px;
 }
 
+.mega-menu-content {
+    display: flex;
+    height: auto;
+    overflow: hidden;
+    justify-content: space-around;
+   
+}
 
+.column-menu h3{
+  color: lightgray;
+ }
+
+.column-menu .mega-li{
+    list-style: none;
+    float: none;
+}
 
 

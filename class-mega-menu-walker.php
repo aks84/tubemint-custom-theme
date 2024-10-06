@@ -55,7 +55,7 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
     }
 
     private function generate_mega_menu_content() {
-        $output = '<div class="mega-menu"><div class="mega-menu-content"><div class="mega-rows">';
+        $output = '<div class="mega-menu"><div class="mega-menu-content">';
         
         for ($i = 1; $i <= 3; $i++) {
             $column_title = get_theme_mod("mega_menu_column_{$i}_title");
@@ -63,15 +63,16 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
             
             if (!empty($column_menu_id)) {
                 $output .= '<div class="mega-column">';
-                if (!empty($column_title)) {
-                    $output .= '<h3>' . esc_html($column_title) . '</h3>';
-                }
+              
                 
                 $column_menu_items = wp_get_nav_menu_items($column_menu_id);
                 if ($column_menu_items) {
                     $output .= '<ul class="column-menu">';
+                if (!empty($column_title)) {
+                    $output .= '<h3>' . esc_html($column_title) . '</h3>';
+                }
                     foreach ($column_menu_items as $menu_item) {
-                        $output .= '<li><a href="' . esc_url($menu_item->url) . '">' . esc_html($menu_item->title) . '</a></li>';
+                        $output .= '<li class="mega-li"><a href="' . esc_url($menu_item->url) . '">' . esc_html($menu_item->title) . '</a></li>';
                     }
                     $output .= '</ul>';
                 }
@@ -79,7 +80,7 @@ class Mega_Menu_Walker extends Walker_Nav_Menu {
             }
         }
         
-        $output .= '</div></div></div>';
+        $output .= '</div></div>';
         return $output;
     }
 
