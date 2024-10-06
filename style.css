@@ -11,7 +11,6 @@ Text Domain: tubemint-custom-theme
 */
 
 
-/* General styles */
 body {
     font-family: Yu Gothic, Dahlia;
     margin: 0;
@@ -50,33 +49,8 @@ a:hover {
     margin-left:20px;
 }
 
-.site-navigation {
-    margin-left: auto;
-    padding-right: 4%;
-}
-
-.site-navigation ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.site-navigation li {
-    margin: 0;
-}
-
-.site-navigation a {
-    font-weight: bold;
-    color: #333;
-    padding: 10px;
-}
-
-.site-navigation a:hover {
-    color: #1e73be;
-}
 
 /* header search styling */
-
 
 .header-search{
     margin-right: 20px;
@@ -426,9 +400,7 @@ a:hover {
     
 }
 
-/*.entry-header, .entry-content, .entry-footer {
-    text-align: center; /* Center text */
-}*/
+
 
 /* Style for filter section */
 .filter-section {
@@ -583,3 +555,84 @@ div#primary_sidebar {
     width: 100%;
     height: auto;
 }
+
+
+
+/* Main Navigation Styles */
+nav {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav li {
+    position: relative;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #f0a500;
+}
+
+/* Dropdown and Mega Menu Shared Styles */
+.sub-menu,
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+/* Dropdown Menu Styles */
+.sub-menu {
+    min-width: 160px;
+}
+
+nav li:hover > .sub-menu {
+    display: block;
+}
+
+.sub-menu li {
+    width: 100%;
+}
+
+.sub-menu a {
+    padding: 10px;
+    color: #fff;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.sub-menu a:hover {
+    background-color: #555;
+}
+
+
+
+.mega-rows{
+    width: 100%;
+    height: auto;
+
+}
+
+
+
+

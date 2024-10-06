@@ -35,24 +35,43 @@ jQuery(document).ready(function($) {
     });
 });
 
-// jQuery(document).ready(function($) {
-//     var header = $('#site-header');
-//     var sticky = header.offset().top;
 
-//     $(window).scroll(function() {
-//         if (window.pageYOffset > sticky) {
-//             header.addClass('sticky');
-//         } else {
-//             header.removeClass('sticky');
-//         }
-//     });
-// });
+jQuery(document).ready(function($) {
+    // Handle hover for the main navigation items
+    $('.nav-menu > li').hover(
+        function() {
+            // Show the mega menu on hover
+            $(this).find('.mega-menu').stop(true, true).slideDown(300);
+        },
+        function() {
+            // Hide the mega menu when not hovering
+            $(this).find('.mega-menu').stop(true, true).slideUp(300);
+        }
+    );
+
+    // Optional: Handle hover for submenu items if necessary
+    $('.menu-item-has-children').hover(
+        function() {
+            // Show the submenu on hover
+            $(this).find('.sub-menu').stop(true, true).slideDown(300);
+        },
+        function() {
+            // Hide the submenu when not hovering
+            $(this).find('.sub-menu').stop(true, true).slideUp(300);
+        }
+    );
+});
 
 
-// header search box
-// const searchbar = document.querySelector('.Searchbar');
-// const toggle = searchbar.querySelector('.Searchbar-toggle');
-
-// toggle.addEventListener('click', event => {
-//   searchbar.classList.toggle('Searchbar--active');
-// });
+jQuery(document).ready(function($) {
+    $('.nav-menu > li.mega-menu-item').hover(
+        function() {
+            console.log('Hover in');
+            $(this).find('.mega-menu').stop(true, true).slideDown(300);
+        },
+        function() {
+            console.log('Hover out');
+            $(this).find('.mega-menu').stop(true, true).slideUp(300);
+        }
+    );
+});

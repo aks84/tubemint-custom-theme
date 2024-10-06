@@ -17,10 +17,21 @@
             <h1><?php bloginfo( 'name' ); ?></h1>
         <?php } ?>
     </div>
-    <nav class="site-navigation">
-        <?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
-    </nav>
 
+<!-- Header Mega Menu -->
+<nav class="main-navigation">
+    <?php
+    wp_nav_menu(array(
+        'theme_location' => 'primary_menu', 
+        'menu_class' => 'nav-menu',
+        'container' => false,
+        'walker' => new Mega_Menu_Walker() // Custom walker to control menu structure
+    ));
+    ?>
+</nav>
+
+
+<!-- Header Search Toggle Bar -->
 <div class="header-search">
 <form role="search" method="get" class="Searchbar" action="<?php echo esc_url(home_url('/')); ?>">
   <input class="Searchbar-input" type="text" placeholder="Search" value="<?php echo get_search_query(); ?>" name="s" autofocus />

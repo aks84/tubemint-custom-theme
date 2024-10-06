@@ -1,5 +1,8 @@
 <?php
 
+require get_template_directory() . '/class-mega-menu-walker.php';
+require get_template_directory() . '/wp-customizer.php';
+
 // Enqueue scripts and styles
 function custom_classic_theme_scripts() {
     wp_enqueue_style('theme-style', get_stylesheet_uri());
@@ -17,6 +20,14 @@ function enqueue_font_awesome() {
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 }
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
+
+
+function load_custom_wp_admin_style() {
+    wp_enqueue_media();
+    wp_enqueue_script('custom-admin-js', get_template_directory_uri() . '/js/admin.js', array('jquery'), '', true);
+}
+add_action('admin_enqueue_scripts', 'load_custom_wp_admin_style');
+
 
 
 
@@ -56,7 +67,7 @@ function tubemint_custom_theme_setup() {
 
     // Register menu
     register_nav_menus(array(
-        'header-menu' => __('Header Menu', 'custom-theme')
+        'primary_menu' => __('Primary Menu', 'custom-theme'),
     ));
 
     register_nav_menus(array(
@@ -64,10 +75,6 @@ function tubemint_custom_theme_setup() {
     ));
 }
 add_action('after_setup_theme', 'tubemint_custom_theme_setup');
-
-
-
-
 
 // post filter
 function filter_posts() {
@@ -110,58 +117,6 @@ function filter_posts() {
 }
 add_action('wp_ajax_filter_posts', 'filter_posts');
 add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
-
-
-
-// Theme customizer 
-
-function tubemint_custom_theme_customizer($wp_customize) {
-    // Social Media Section
-    $wp_customize->add_section('footer_social_section', array(
-        'title' => __('Footer Social Media', 'custom-theme'),
-        'priority' => 30,
-    ));
-
-    $social_media = array('Facebook', 'Twitter', 'Instagram', 'LinkedIn');
-    foreach ($social_media as $platform) {
-        $wp_customize->add_setting('footer_' . strtolower($platform) . '_link', array(
-            'default' => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ));
-
-        $wp_customize->add_control('footer_' . strtolower($platform) . '_link', array(
-            'label' => __($platform . ' URL', 'custom-theme'),
-            'section' => 'footer_social_section',
-            'type' => 'url',
-        ));
-    }
-
-    // Payment Icons Section
-    $wp_customize->add_section('footer_payment_section', array(
-        'title' => __('Footer Payment Icons', 'custom-theme'),
-        'priority' => 31,
-    ));
-
-    // Add a repeatable image field for payment gateway icons
-    for ($i = 1; $i <= 5; $i++) {
-        $wp_customize->add_setting('footer_payment_icon_' . $i, array(
-            'default' => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ));
-
-        $wp_customize->add_control(new WP_Customize_Image_Control(
-            $wp_customize,
-            'footer_payment_icon_' . $i,
-            array(
-                'label' => __('Payment Gateway Icon ' . $i, 'custom-theme'),
-                'section' => 'footer_payment_section',
-                'settings' => 'footer_payment_icon_' . $i,
-            )
-        ));
-    }
-}
-add_action('customize_register', 'tubemint_custom_theme_customizer');
-
 
 
 
@@ -278,3 +233,45 @@ function custom_theme_slider_customizer($wp_customize) {
     }
 }
 add_action('customize_register', 'custom_theme_slider_customizer');
+
+
+function custom_nav_menu_meta_box($item_id, $item, $depth, $args) {
+    // Check if the item is marked as a mega menu
+    $is_mega_menu = get_post_meta($item_id, '_menu_item_is_mega_menu', true);
+    $is_drop_menu = get_post_meta($item_id, '_menu_item_is_drop_menu', true);
+
+    // Output the checkbox for the mega menu option
+    ?>
+    <p class="field-mega-menu description description-wide">
+        <label for="edit-menu-item-mega-menu-<?php echo esc_attr($item_id); ?>">
+            <input type="checkbox" id="edit-menu-item-mega-menu-<?php echo esc_attr($item_id); ?>" value="yes" name="menu-item-mega-menu[<?php echo esc_attr($item_id); ?>]" <?php checked($is_mega_menu, 'yes'); ?> />
+            <?php esc_html_e('Is it mega menu?'); ?>
+        </label>
+    </p>
+    <p class="field-dropdown-menu description description-wide">
+        <label for="edit-menu-item-dropdown-menu-<?php echo esc_attr($item_id); ?>">
+            <input type="checkbox" id="edit-menu-item-dropdown-menu-<?php echo esc_attr($item_id); ?>" value="yes" name="menu-item-dropdown-menu[<?php echo esc_attr($item_id); ?>]" <?php checked($is_drop_menu, 'yes'); ?> />
+            <?php esc_html_e('Is is drop-down menu?'); ?>
+        </label>
+    </p>
+    <?php
+}
+add_action('wp_nav_menu_item_custom_fields', 'custom_nav_menu_meta_box', 10, 4);
+
+
+function save_custom_nav_menu_meta_box($menu_id, $menu_item_db_id, $args) {
+    // Check if the mega menu option was set for this menu item
+    if (isset($_POST['menu-item-mega-menu'][$menu_item_db_id])) {
+        update_post_meta($menu_item_db_id, '_menu_item_is_mega_menu', 'yes');
+    } else {
+        delete_post_meta($menu_item_db_id, '_menu_item_is_mega_menu');
+    }
+
+    if (isset($_POST['menu-item-drop-menu'][$menu_item_db_id])) {
+        update_post_meta($menu_item_db_id, '_menu_item_is_drop_menu', 'yes');
+    } else {
+        delete_post_meta($menu_item_db_id, '_menu_item_is_drop_menu');
+    }
+}
+add_action('wp_update_nav_menu_item', 'save_custom_nav_menu_meta_box', 10, 3);
+
