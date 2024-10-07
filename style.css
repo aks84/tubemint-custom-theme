@@ -560,7 +560,7 @@ div#primary_sidebar {
 
 /* Main Navigation Styles */
 nav {
-    background-color: #333;
+   
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
@@ -583,14 +583,14 @@ nav .menu-item {
 }
 
 nav a {
-    color: #fff;
+    color: #210202;
     text-decoration: none;
     padding: 10px;
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #f0a500;
+    color: black;
 }
 
 
@@ -599,7 +599,7 @@ nav a:hover {
 .sub-menu {
     display: none;
     position: absolute;
-    background-color: #444;
+    background-color: ghostwhite;
     border-radius: 4px;
     z-index: 1000;
 }
@@ -610,35 +610,31 @@ nav a:hover {
     min-width: 160px;
 }
 
-nav menu-item:hover > .sub-menu {
+nav .menu-item:hover > .sub-menu {
     display: block;
-}
-
-.sub-menu li {
-/*    width: 100%;*/
 }
 
 .sub-menu a {
     padding: 10px;
-    color: #fff;
+    color: #210202;
     display: block;
     transition: background-color 0.3s;
 }
 
-.sub-menu a:hover {
-    background-color: #555;
-}
+
 .mega-menu
  {
     display: none;
     position: absolute;
-    background-color: #444;
+    background-color: ghostwhite;
     border-radius: 4px;
     z-index: 1000;
     width: 60%;
     float: left;
     left: 20%;
     padding: 15px;
+
+    border-bottom: 2px solid gray;
 }
 
 .mega-menu-content {
@@ -650,12 +646,14 @@ nav menu-item:hover > .sub-menu {
 }
 
 .column-menu h3{
-  color: lightgray;
+  color: #210202;
  }
 
 .column-menu .mega-li{
     list-style: none;
     float: none;
+    margin: 5px 0px;
+
 }
 
 
